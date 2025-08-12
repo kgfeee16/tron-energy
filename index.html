@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>波场能量一键购买 - 快速获取TRON能量</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00B42A', // 绿色作为主色调，代表安全和信任
+                        secondary: '#0FC6C2', // 青色作为辅助色
+                        dark: '#1D2129',
+                        light: '#F2F3F5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 180, 42, 0.1), 0 10px 10px -5px rgba(0, 180, 42, 0.04);
+            }
+            .pulse-animation {
+                animation: pulse 2s infinite;
+            }
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(0, 180, 42, 0.4);
+                }
+                70% {
+                    box-shadow: 0 0 0 10px rgba(0, 180, 42, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(0, 180, 42, 0);
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-bolt text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-primary">波场能量租赁</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#features" class="text-gray-600 hover:text-primary transition-colors">服务特点</a>
+                <a href="#guide" class="text-gray-600 hover:text-primary transition-colors">购买指南</a>
+                <a href="#examples" class="text-gray-600 hover:text-primary transition-colors">示例说明</a>
+                <a href="#support" class="text-gray-600 hover:text-primary transition-colors">客服支持</a>
+            </nav>
+            <button class="md:hidden text-gray-600" id="menuToggle">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md px-4 py-2">
+            <a href="#features" class="block py-2 text-gray-600 hover:text-primary">服务特点</a>
+            <a href="#guide" class="block py-2 text-gray-600 hover:text-primary">购买指南</a>
+            <a href="#examples" class="block py-2 text-gray-600 hover:text-primary">示例说明</a>
+            <a href="#support" class="block py-2 text-gray-600 hover:text-primary">客服支持</a>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gradient-to-br from-primary/90 to-secondary/90 text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block mb-4 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium">
+                ⚡ 全新上线 · 即买即用
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-shadow">波场能量一键购买</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90">简单快捷获取TRON能量，无需注册，秒到账，为您的波场交易提供充足动力</p>
+            
+            <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 md:p-8 max-w-2xl mx-auto mb-10 border border-white/20">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mb-6">
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold mb-2">2 TRX</div>
+                        <div class="text-white/80">能量价格</div>
+                    </div>
+                    <div class="text-2xl md:text-3xl">→</div>
+                    <div class="text-center">
+                        <div class="text-3xl md:text-4xl font-bold mb-2">65,000</div>
+                        <div class="text-white/80">能量值</div>
+                    </div>
+                </div>
+                
+                <div class="pulse-animation bg-white rounded-lg p-4 mb-6">
+                    <div class="flex items-center justify-center mb-2">
+                        <i class="fa fa-link text-primary mr-2"></i>
+                        <span class="font-medium">收款地址</span>
+                    </div>
+                    <div class="bg-gray-100 text-dark font-mono p-3 rounded break-all text-sm md:text-base">
+                        TQStUfgXGgHMbu9TGW2zxk6ujsEDuCTJ8a
+                    </div>
+                    <button id="copyBtn" class="mt-3 bg-primary hover:bg-primary/90 text-white py-2 px-4 rounded transition-colors w-full">
+                        <i class="fa fa-copy mr-1"></i> 复制地址
+                    </button>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="#guide" class="bg-white text-primary hover:bg-gray-100 font-medium py-3 px-6 rounded transition-colors flex-1">
+                        查看购买指南
+                    </a>
+                    <a href="#support" class="bg-transparent border border-white text-white hover:bg-white/10 font-medium py-3 px-6 rounded transition-colors flex-1">
+                        联系客服
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base">
+                <div class="flex items-center">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <span>支持为自己或他人购买</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-bolt mr-2"></i>
+                    <span>秒到账，无需注册</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-shield mr-2"></i>
+                    <span>TRON官方认证品质保障</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特点区域 -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">为什么选择我们的能量服务</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-light rounded-xl p-6 shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-bolt text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">即时到账</h3>
+                    <p class="text-gray-600">转账完成后能量立即到账，无需等待，让您的交易随时可用。</p>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-lock text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">安全可靠</h3>
+                    <p class="text-gray-600">TRON官方认证，品质保障，多年服务经验，安全稳定，值得信赖。</p>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-user-o text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">无需注册</h3>
+                    <p class="text-gray-600">无需繁琐注册流程，直接转账即可获取能量，简单高效。</p>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-exchange text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">灵活购买</h3>
+                    <p class="text-gray-600">支持为自己或他人购买能量，满足各种使用场景需求。</p>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-calculator text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">透明定价</h3>
+                    <p class="text-gray-600">固定比例兑换，2 TRX即可获得65,000能量，无隐藏费用。</p>
+                </div>
+                
+                <div class="bg-light rounded-xl p-6 shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fa fa-headphones text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">专业支持</h3>
+                    <p class="text-gray-600">遇到任何问题，我们的客服团队将为您提供及时帮助。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 购买指南 -->
+    <section id="guide" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">快速购买指南</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">只需简单两步，即可获取波场能量，无需复杂操作</p>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+                    <div class="flex">
+                        <div class="bg-primary text-white w-12 flex items-center justify-center font-bold text-xl">1</div>
+                        <div class="p-6 flex-1">
+                            <h3 class="text-xl font-semibold mb-2">向指定地址转账</h3>
+                            <p class="text-gray-600 mb-4">转账金额需为 ≥ 2TRX 的整数（2、4、6...）</p>
+                            <div class="bg-light p-4 rounded-lg font-mono text-sm break-all">
+                                收款地址：TQStUfgXGgHMbu9TGW2zxk6ujsEDuCTJ8a
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="flex">
+                        <div class="bg-primary text-white w-12 flex items-center justify-center font-bold text-xl">2</div>
+                        <div class="p-6 flex-1">
+                            <h3 class="text-xl font-semibold mb-2">设置备注信息</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-primary/10 p-2 rounded-full mr-3 mt-1">
+                                        <i class="fa fa-user text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">为自己购买</h4>
+                                        <p class="text-gray-600">备注留空，能量将自动分配到您的转账地址</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-primary/10 p-2 rounded-full mr-3 mt-1">
+                                        <i class="fa fa-users text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">为他人购买</h4>
+                                        <p class="text-gray-600">备注填写对方地址，能量将分配到指定地址</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 bg-primary/10 rounded-lg p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <i class="fa fa-info-circle text-primary text-xl mt-1 mr-4"></i>
+                        <div>
+                            <h4 class="font-semibold mb-2">重要提示</h4>
+                            <p class="text-gray-700 mb-2">转账时请确保地址正确无误，建议先小额测试。</p>
+                            <p class="text-gray-700">能量到账后，您可以在波场钱包中查看能量余额。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 示例说明 -->
+    <section id="examples" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">购买示例说明</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">了解不同转账金额可获得的能量数量</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="border border-gray-200 rounded-xl p-6 text-center card-hover">
+                    <div class="text-4xl font-bold text-primary mb-2">2 TRX</div>
+                    <div class="text-2xl mb-4">→</div>
+                    <div class="text-3xl font-semibold">65,000 能量</div>
+                    <p class="mt-4 text-gray-600 text-sm">基础套餐，满足小型交易需求</p>
+                </div>
+                
+                <div class="border border-primary rounded-xl p-6 text-center bg-primary/5 card-hover relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                        最受欢迎
+                    </div>
+                    <div class="text-4xl font-bold text-primary mb-2">6 TRX</div>
+                    <div class="text-2xl mb-4">→</div>
+                    <div class="text-3xl font-semibold">131,000 能量</div>
+                    <p class="mt-4 text-gray-600 text-sm">性价比之选，适合多数用户</p>
+                </div>
+                
+                <div class="border border-gray-200 rounded-xl p-6 text-center card-hover">
+                    <div class="text-4xl font-bold text-primary mb-2">10 TRX</div>
+                    <div class="text-2xl mb-4">→</div>
+                    <div class="text-3xl font-semibold">262,000 能量</div>
+                    <p class="mt-4 text-gray-600 text-sm">大额套餐，满足多次交易需求</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 max-w-2xl mx-auto bg-light rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4 text-center">能量计算方式</h3>
+                <p class="text-gray-700 text-center mb-6">每2 TRX可获得65,000能量，按比例递增</p>
+                
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <div class="bg-white px-3 py-1 rounded shadow-sm">3 TRX → 65,000 能量</div>
+                    <div class="bg-white px-3 py-1 rounded shadow-sm">4 TRX → 130,000 能量</div>
+                    <div class="bg-white px-3 py-1 rounded shadow-sm">5 TRX → 130,000 能量</div>
+                    <div class="bg-white px-3 py-1 rounded shadow-sm">7 TRX → 196,000 能量</div>
+                    <div class="bg-white px-3 py-1 rounded shadow-sm">8 TRX → 260,000 能量</div>
+                    <div class="bg-white px-3 py-1 rounded shadow-sm">任意金额均按此比例计算</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 信任保障 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">品质保障</h2>
+            
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                            <i class="fa fa-shield text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">安全保障</h3>
+                    </div>
+                    <p class="text-gray-600">采用先进的安全技术，确保每一笔交易安全可靠。多年行业经验，为用户提供稳定服务。</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                            <i class="fa fa-clock-o text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">稳定运行</h3>
+                    </div>
+                    <p class="text-gray-600">系统7×24小时稳定运行，确保您随时可以购买能量，无需担心服务中断问题。</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                            <i class="fa fa-balance-scale text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">公平透明</h3>
+                    </div>
+                    <p class="text-gray-600">固定兑换比例，无任何隐藏费用，所有交易公开透明，让您明明白白消费。</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mr-3">
+                            <i class="fa fa-comments text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">专业客服</h3>
+                    </div>
+                    <p class="text-gray-600">遇到任何问题，我们的专业客服团队将为您提供及时有效的解决方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客服支持 -->
+    <section id="support" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">客服支持</h2>
+            <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">有任何问题？我们的客服团队随时为您提供帮助</p>
+            
+            <div class="max-w-md mx-auto bg-light rounded-xl p-8 text-center">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa fa-comments text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-4">联系客服</h3>
+                <p class="text-gray-600 mb-6">工作时间：全天候在线，随时为您解答问题</p>
+                
+                <div class="flex justify-center mb-6">
+                    <a href="https://t.me/Kevinlifeau" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-full transition-colors flex items-center">
+                        <i class="fa fa-telegram"></i> 客服：@Kevinlifeau
+                    </a>
+                </div>
+                
+                <div class="text-gray-500 text-sm">
+                    <p class="mb-2">更多服务：</p>
+                    <a href="#" class="text-primary hover:underline">波场资源租赁</a> · 
+                    <a href="#" class="text-primary hover:underline">节点部署</a> · 
+                    <a href="#" class="text-primary hover:underline">技术咨询</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动召唤 -->
+    <section class="py-16 bg-gradient-to-br from-primary/90 to-secondary/90 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">立即获取波场能量</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">简单快捷，无需注册，一转即用，让您的波场交易畅通无阻</p>
+            
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 max-w-md mx-auto mb-8">
+                <div class="font-mono p-3 bg-white text-dark rounded break-all text-sm md:text-base">
+                    TQStUfgXGgHMbu9TGW2zxk6ujsEDuCTJ8a
+                </div>
+                <button id="copyBtn2" class="mt-3 bg-white text-primary hover:bg-gray-100 py-2 px-6 rounded transition-colors">
+                    <i class="fa fa-copy mr-1"></i> 复制收款地址
+                </button>
+            </div>
+            
+            <a href="#guide" class="inline-block bg-white text-primary hover:bg-gray-100 font-medium py-3 px-8 rounded-full transition-colors text-lg">
+                开始购买 <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <i class="fa fa-bolt text-primary text-2xl mr-2"></i>
+                    <h2 class="text-xl font-bold">波场能量租赁</h2>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://t.me/Kevinlifeau" class="bg-white/10 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                        <i class="fa fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-gray-400 text-sm">
+                <p>免责声明：本服务仅提供技术支持，用户使用需遵守相关法律法规</p>
+                <p class="mt-2">© 2023 波场能量租赁服务. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 复制成功提示 -->
+    <div id="copyToast" class="fixed bottom-6 right-6 bg-primary text-white px-4 py-2 rounded shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center">
+        <i class="fa fa-check mr-2"></i>
+        <span>地址已复制</span>
+    </div>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+                header.classList.add('shadow');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+                header.classList.remove('shadow');
+            }
+        });
+
+        // 复制地址功能
+        function setupCopyButton(buttonId, toastId) {
+            document.getElementById(buttonId).addEventListener('click', function() {
+                const address = 'TQStUfgXGgHMbu9TGW2zxk6ujsEDuCTJ8a';
+                navigator.clipboard.writeText(address).then(() => {
+                    const toast = document.getElementById(toastId);
+                    toast.classList.remove('translate-y-20', 'opacity-0');
+                    toast.classList.add('translate-y-0', 'opacity-100');
+                    
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-20', 'opacity-0');
+                        toast.classList.remove('translate-y-0', 'opacity-100');
+                    }, 2000);
+                });
+            });
+        }
+
+        setupCopyButton('copyBtn', 'copyToast');
+        setupCopyButton('copyBtn2', 'copyToast');
+
+        // 添加页面载入动画
+        window.addEventListener('load', function() {
+            document.body.classList.add('opacity-100');
+            document.body.classList.remove('opacity-0');
+        });
+    </script>
+</body>
+</html>
