@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# 网站地图 - 主要部署平台
+Sitemap: https://tron-energy-one.vercel.app/sitemap.xml
+
+# 备用网站地图 - GitHub Pages
+Sitemap: https://kgfeee16.github.io/tron-energy/sitemap.xml
+
+# 允许搜索引擎爬取所有内容
+# 专门针对主要搜索引擎的配置
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot  
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
